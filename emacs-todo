@@ -10,3 +10,5 @@
   - safe somewhere else later
   - forcefully overwrite
 * global command history
+* auto-enable org-mode for TODO
+  - seems to be working for "foo-todo" files already, but not "TODO"
