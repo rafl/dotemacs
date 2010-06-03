@@ -1,0 +1,29 @@
+* hide pod, also in cperl
+  - outline? OMGSLOW11 (no, really, *really*, *REALLY* slow)
+  - folding? doesn't look bad, but apparently only does substring
+    matching, so can't do /^=cut/ et al properly
+  - hideshow? looks good. needs custom function for moving a block
+    forward. c.f. [[http://blogs.msdn.com/b/dotnetinterop/archive/2008/04/14/making-hideshow-el-work-with-csharp-mode-el-and-region-endregion.aspx][HideShow for C# regions]]
+  - [[http://www.emacswiki.org/emacs/HideIfDef][HideIfDef]] does something similar
+  - [[http://www.emacswiki.org/emacs/HideRegion][HideRegion]]
+  - [[http://www.emacswiki.org/emacs/HideLines][HideLines]]
+  - [[http://www.emacswiki.org/emacs/HighLight][HighLight]] also implements some sort of hiding, but is quite likely
+    not exactly what i want
+* DONE new keywords. configurable. weaver.ini, dzil.ini
+  - [[fi][weaver-mode.el]] does it. needs to be incorporated into pod-mode.
+  - [[file:~/projects/perl/Dist-Zilla-App-Command-weaverconf/][Dist::Zilla::App::Command::weaverconf]] needs shipping
+* automatic pod escape generation
+* completion lowercases the word being completed
+  - very annoying when completion module names
+  - solve by using another completer? hippie expand?
+* flymake hooks for podchecker
+* Marking L<links> to be able to open them with C-c C-o
+* Interactively generating L<links|To/something>
+  - is it desc|href or href|desc?
+  - what's the delimiter for fragments again?
+  - how's that section i want to link to actually called?
+* indenting of verbatim paras
+  - will be fixed with pod-cperl-mode by using cperl in verbatim
+* Custom faces for headings
+  - sort of like in latex-mode
+  - (defface ...
