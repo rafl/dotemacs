@@ -9,9 +9,6 @@
   - [[http://www.emacswiki.org/emacs/HideLines][HideLines]]
   - [[http://www.emacswiki.org/emacs/HighLight][HighLight]] also implements some sort of hiding, but is quite likely
     not exactly what i want
-* DONE new keywords. configurable. weaver.ini, dzil.ini
-  - [[fi][weaver-mode.el]] does it. needs to be incorporated into pod-mode.
-  - [[file:~/projects/perl/Dist-Zilla-App-Command-weaverconf/][Dist::Zilla::App::Command::weaverconf]] needs shipping
 * automatic pod escape generation
 * completion lowercases the word being completed
   - very annoying when completion module names
