@@ -1,0 +1,2 @@
+screen -t tunnel 0 autossh -M 0 -L 4041:localhost:4041 -L 4042:localhost:4042 -L 4043:localhost:4043 -L 4044:localhost:4044 -L 4045:localhost:4045 goatse.co.uk
+detach
