@@ -1,14 +1,22 @@
 * C-p in minibuffer, sometimes. M-x buffer is one example.
+  - define-key?
+  - local-set-key?
 * implicit make-directory for found files in new dirs
   - only with confirmation
+  - visit-hook + file-exists-p + make-directory
 * improve startup time
 ** byte compile
    - not a huge win
 ** concat files
 ** more autoload-ing
+** emacs daemon
 * make read-only buffer writable to
   - safe somewhere else later
   - forcefully overwrite
+  - C-x C-q to toggle read-only
 * global command history
-* auto-enable org-mode for TODO
-  - seems to be working for "foo-todo" files already, but not "TODO"
+  (require 'session)
+  (add-hook 'after-init-hook 'session-initialize)
+* cperl mode package name highlight
+  - yes, package names *can* contain digits
+    Pod::Elemental::Element::Pod5::Command

@@ -14,7 +14,10 @@
   - very annoying when completion module names
   - solve by using another completer? hippie expand?
 * flymake hooks for podchecker
+** hook in pod-mode, register in user conf
 * Marking L<links> to be able to open them with C-c C-o
+** L<> stuff already exists
+** parse to link -> local keybinding in pod mode
 * Interactively generating L<links|To/something>
   - is it desc|href or href|desc?
   - what's the delimiter for fragments again?
