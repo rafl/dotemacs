@@ -2,7 +2,7 @@ LISP_FILES = $(shell find . -type f -name '*.el')
 COMPILED_LISP_FILES = $(patsubst %.el,%.elc,$(LISP_FILES))
 
 %.elc: %.el
-	emacs --batch --eval '(byte-compile-file "$<")' > $@
+	emacs --batch --eval '(if (not (byte-compile-file "$<")) (error "compilation error"))' > $@
 
 all: compile_all
 

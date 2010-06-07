@@ -100,7 +100,22 @@
     (((class color) (min-colors 16) (background dark)) (:foreground "PaleGreen"))
     (((class color) (min-colors 8)) (:foreground "green"))
     (t (:weight bold :underline t)))
-  "Font used to hightlight common pseudo headers in git commit messages"
+  "Face used to hightlight common pseudo headers in git commit messages"
+  :group 'git-commit-faces)
+
+(defface git-commit-note-brace-face
+  '()
+  "Face used to highlight braces within notes in git commit messages"
+  :group 'git-commit-faces)
+
+(defface git-commit-note-address-face
+  '()
+  "Face used to highlight email addresses within notes in git commit messages"
+  :group 'git-commit-faces)
+
+(defface git-commit-note-face
+  '()
+  "Face used to highlight notes within git commit messages"
   :group 'git-commit-faces)
 
 (defconst git-commit-font-lock-keywords-1
@@ -115,6 +130,11 @@
      (2 'git-commit-pseudo-header-face))
     ("^\\w[^\s\n]+:\s.*$"
      (0 'git-commit-pseudo-header-face))
+    ("^\\(\\[\\)\\([^\s@]+@[^\s@]+:\\)\\(.*\\)\\(\\]\\)$"
+     (1 'git-commit-note-brace-face)
+     (2 'git-commit-note-address-face)
+     (3 'git-commit-note-face)
+     (4 'git-commit-note-brace-face))
     (".*"
      (0 'git-commit-text-face))))
 
@@ -196,18 +216,25 @@
       (forward-line 1)
       (point))))
 
-(defun git-commit-insert-header (type name email)
-  (let ((signoff-at (git-commit-find-pseudo-header-position)))
-    (save-excursion
-      (goto-char (- signoff-at 1))
-      (let* ((prev-line (thing-at-point 'line))
-             (pre (if (or
-                       (string-match "^[^\s:]+:.+$" prev-line)
-                       (string-match "\\`\s*$" prev-line))
-                      ""
-                    "\n")))
-        (goto-char signoff-at)
-        (insert (format "%s%s: %s <%s>\n" pre type name email))))))
+(defun git-commit-insert-header (type name email &optional note)
+  (let* ((signoff-at (git-commit-find-pseudo-header-position))
+         (note-at (save-excursion
+                    (goto-char (- signoff-at 1))
+                    (let* ((prev-line (thing-at-point 'line))
+                           (pre (if (or
+                                     (string-match "^[^\s:]+:.+$" prev-line)
+                                     (string-match "\\`\s*$" prev-line))
+                                    ""
+                                 "\n")))
+                      (goto-char signoff-at)
+                      (insert (format "%s%s: %s <%s>\n" pre type name email))
+                      (when note
+                        (let ((note-text (if (stringp note) note "")))
+                          (insert (format "[%s: %s]\n" email note-text))
+                          (when (not (stringp note))
+                            (- (point) 2))))))))
+    (when note-at
+      (goto-char note-at))))
 
 (defun git-commit-insert-header-as-self (type)
   (let ((comitter-name (git-commit-comitter-name))
