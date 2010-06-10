@@ -15,6 +15,9 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(indicate-empty-lines t)
+ '(mouse-1-click-in-non-selected-windows nil)
+ '(mouse-avoidance-mode (quote exile) nil (avoid))
+ '(mouse-yank-at-point t)
  '(safe-local-variable-values (quote ((c-indentation-style . bsd))))
  '(show-trailing-whitespace t))
 (custom-set-faces
@@ -28,4 +31,5 @@
  '(cperl-invalid-face default)
  '(flymake-errline ((((class color) (background light)) (:background "brightred" :weight bold))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "firebrick1"))))
+ '(rcirc-dim-nick ((t (:inherit default :foreground "grey" :strike-through t))))
  '(region ((((class color) (min-colors 88) (background light)) (:background "darkgrey")))))
