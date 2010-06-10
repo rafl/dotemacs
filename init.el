@@ -14,15 +14,18 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((c-indentation-style . bsd)))))
+ '(indicate-empty-lines t)
+ '(safe-local-variable-values (quote ((c-indentation-style . bsd))))
+ '(show-trailing-whitespace t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:height 100 :foundry "bitstream" :family "Bitstream Vera Sans Mono"))))
- '(cperl-array-face ((((class color) (background light)) (:foreground "yellow"))))
- '(cperl-hash-face ((((class color) (background light)) (:foreground "brightcyan"))))
+ '(default ((t (:stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "bitstream" :family "Bitstream Vera Sans Mono"))))
+ '(cperl-array-face ((((class color) (background light)) (:foreground "yellow4"))))
+ '(cperl-hash-face ((((class color) (background light)) (:foreground "cyan3"))))
  '(cperl-invalid-face default)
  '(flymake-errline ((((class color) (background light)) (:background "brightred" :weight bold))))
+ '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "firebrick1"))))
  '(region ((((class color) (min-colors 88) (background light)) (:background "darkgrey")))))
