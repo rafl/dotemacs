@@ -11,4 +11,4 @@
 
 (setf rafl-irc-password "zqym-sxmh")
 
-(rafl-irc-connect-all)
+;(rafl-irc-connect-all)

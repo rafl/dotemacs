@@ -32,6 +32,7 @@
   (setq rcirc-server-name (rafl-irc-networks-port-to-network port)))
 
 (defun rafl-irc-connect-all ()
+  (interactive)
   (dolist (network rafl-irc-networks)
     (rafl-irc-connect (car network))))
 
@@ -56,4 +57,4 @@
 
 (ad-activate 'rcirc-format-response-string)
 
-(rcirc-track-minor-mode)
+;(rcirc-track-minor-mode)
