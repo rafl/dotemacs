@@ -1,6 +1,6 @@
 (let ((screen-name "irc-tunnel"))
   (when (not (screen-startedp screen-name))
-    (screen-start-detached-with-screenrc screen-name (concat emacs-conf-path "/host/tardis.perldition.org/start-irc-tunnel.screenrc"))))
+    (screen-start-detached-with-screenrc screen-name (concat emacs-conf-path "/host/tardis.home.perldition.org/start-irc-tunnel.screenrc"))))
 
 (setf rafl-irc-networks
       '((4041 "oftc")
@@ -10,3 +10,5 @@
         (4045 "bitlbee")))
 
 (setf rafl-irc-password "zqym-sxmh")
+
+(rafl-irc-connect-all)
