@@ -1,4 +1,5 @@
 (require 'rcirc)
+(require 'rcirc-late-fix)
 
 (add-hook 'rcirc-mode-hook
           (lambda ()
@@ -47,3 +48,12 @@
   (walk-windows 'rafl-irc-dynamic-fill-column-window 'no-minibuf frame))
 
 (add-to-list 'window-size-change-functions 'rafl-irc-dynamic-fill-column)
+
+(defadvice rcirc-format-response-string (after dim-entire-line)
+  (when (and rcirc-dim-nicks sender
+             (string-match (regexp-opt rcirc-dim-nicks 'words) sender))
+    (setq ad-return-value (rcirc-facify ad-return-value 'rcirc-dim-nick))))
+
+(ad-activate 'rcirc-format-response-string)
+
+(rcirc-track-minor-mode)
