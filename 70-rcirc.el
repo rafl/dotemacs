@@ -3,6 +3,7 @@
 
 (add-hook 'rcirc-mode-hook
           (lambda ()
+            (rcirc-track-minor-mode)
             (flyspell-mode t)
             (setq show-trailing-whitespace nil)
             (set (make-local-variable 'scroll-conservatively) 8192)))
@@ -11,30 +12,14 @@
  rcirc-debug-flag t
  rcirc-time-format "%H:%M:%S ")
 
-(defvar rafl-irc-networks nil
-  "a list of my irc ports and their network names")
-
-(defvar rafl-irc-password nil
-  "the password to be used when connecting to any of my irc networks")
-
-(defun rafl-irc-networks-port-to-network (port)
-  (dolist (network rafl-irc-networks)
-    (if (= port (car network))
-        (return (cadr network)))))
-
-(defun rafl-irc-networks-network-to-port (network)
-  (dolist (var rafl-irc-networks)
-    (if (string= network (cadr var))
-        (return (car var)))))
-
-(defun rafl-irc-connect (port)
+(defun rafl-rcirc-connect (port)
   (rcirc-connect "localhost" port nil nil rafl-irc-password)
   (setq rcirc-server-name (rafl-irc-networks-port-to-network port)))
 
-(defun rafl-irc-connect-all ()
+(defun rafl-rcirc-connect-all ()
   (interactive)
   (dolist (network rafl-irc-networks)
-    (rafl-irc-connect (car network))))
+    (rafl-rcirc-connect (car network))))
 
 (defvar rafl-irc-dynamic-fill-column-margin 3)
 
@@ -56,5 +41,3 @@
     (setq ad-return-value (rcirc-facify ad-return-value 'rcirc-dim-nick))))
 
 (ad-activate 'rcirc-format-response-string)
-
-;(rcirc-track-minor-mode)
