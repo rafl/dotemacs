@@ -58,12 +58,14 @@
  mouse-yank-at-point t)
 (mouse-avoidance-mode 'exile)
 
-(set-default
- 'show-trailing-whitespace t)
-
-(add-hook 'help-mode-hook
+;; do not show trailing ws by default, but whenever some buffer
+;; changes its major mode, enable it if the buffer is visiting some
+;; fime
+(set-default 'show-trailing-whitespace nil)
+(add-hook 'after-change-major-mode-hook
           (lambda ()
-            (setq show-trailing-whitespace nil)))
+              (when (buffer-file-name)
+                (setq show-trailing-whitespace t))))
 
 (setq fill-column 80)
 

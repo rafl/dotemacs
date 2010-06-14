@@ -2,10 +2,6 @@
 (require 'erc-bbdb)
 (require 'erc-networks)
 
-(add-hook 'erc-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace nil)))
-
 ;; don't use the NETWORK declared by the server or the server hostname
 ;; as the name of the network. instead, ask
 ;; `rafl-irc-networks-port-to-network'.

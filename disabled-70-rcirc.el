@@ -5,7 +5,6 @@
           (lambda ()
             (rcirc-track-minor-mode)
             (flyspell-mode t)
-            (setq show-trailing-whitespace nil)
             (set (make-local-variable 'scroll-conservatively) 8192)))
 
 (setq

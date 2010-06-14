@@ -94,13 +94,6 @@
     wouldn't be bad. using a prefix arg for opening the n-th link
     backwards would also rock.
 
-* trailing whitespace
-  show-trailing-whitespace is very good and useful, but both enabling
-  it or everything that needs it, or disabling for everything that
-  shouldn't use it, like i currently do, sucks. a good rule of thumb
-  to enable it would probably be "every buffer that's associated with
-  a real file"
-
 * working with pastes or anything else from the web
   - new buffer + M-1 M-! curl is lame
 

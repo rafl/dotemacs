@@ -1,10 +1,5 @@
 (require 'eshell)
 
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace nil)
-            (eldoc-mode)))
-
 (setq
  eshell-buffer-name "*shell*"
  eshell-banner-message ""
