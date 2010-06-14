@@ -4,9 +4,11 @@
   - also, all the history is sort of in one namespace. earlier values
     entered in a minibuffer for replace-regexp, or whatever, are not
     at all useful in an M-x minibuffer.
+
 * implicit make-directory for found files in new dirs
   - only with confirmation
   - visit-hook + file-exists-p + make-directory
+
 * improve startup time
 ** byte compile
    - not a huge win
@@ -19,24 +21,29 @@
     it's already M-x customized
 ** emacs server
   - doesn't suffer from the daemon issue, but utter failure otherwise
+
 * cperl mode package name highlight
   - yes, package names *can* contain digits
     e.g. Pod::Elemental::Element::Pod5::Command
+
 * cperl string highlighting
   - no, "@Foo" is *not* an array
   - especially hateful in heredocs without interpolation
+
 * buffer namespaces/grouping?
   - erc/non-erc buffers. when working, i don't normally care for
     anything erc related. erc already has C-c C-b for an iswitchb with
     only erc buffers. want something similar the other way
     around. maybe also with better grouping. Code for grouping
     definitions can be stolen from [[http://www.emacswiki.org/emacs/IbufferMode#toc6][there]].
+
 * less manual filling
   - there's auto-fill-mode and adaptive fill and whatnot. i need to
     figure out how to enable something like that when it's actually
     necessary. hardcoding lists of modes, applying hooks to those, or
     whatever is suck, and so is enabling it always, without giving it
     any thought.
+
 * flyspell improvements
   - same issue as with auto-fill
   - setting which dictionary to use all the time is lame. i should
@@ -45,6 +52,7 @@
     technical terms
   - should be able to ignore case in many circumstances. for example
     erc, todo files, anything that isn't supposed to be "proper" text
+
 * shell stuff
   - eshell
     - lisp only. very nicely integrated. very easy to integrate and
