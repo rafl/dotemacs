@@ -1,6 +1,9 @@
 * C-p in minibuffer, sometimes. M-x buffer is one example.
   - define-key?
   - local-set-key?
+  - also, all the history is sort of in one namespace. earlier values
+    entered in a minibuffer for replace-regexp, or whatever, are not
+    at all useful in an M-x minibuffer.
 * implicit make-directory for found files in new dirs
   - only with confirmation
   - visit-hook + file-exists-p + make-directory
@@ -10,13 +13,98 @@
 ** concat files
 ** more autoload-ing
 ** emacs daemon
-* make read-only buffer writable to
-  - safe somewhere else later
-  - forcefully overwrite
-  - C-x C-q to toggle read-only
+  - doesn't seem too bad, but comes with massive suck when using
+    customized fonts. both in gui and cli mode. needs more special
+    configuration to set that up again properly for clients, even if
+    it's already M-x customized
+** emacs server
+  - doesn't suffer from the daemon issue, but utter failure otherwise
 * global command history
   (require 'session)
   (add-hook 'after-init-hook 'session-initialize)
 * cperl mode package name highlight
   - yes, package names *can* contain digits
     Pod::Elemental::Element::Pod5::Command
+* cperl string highlighting
+  - no, "@Foo" is *not* an array
+  - especially hateful in heredocs without interpolation
+* buffer namespaces/grouping?
+  - erc/non-erc buffers. when working, i don't normally care for
+    anything erc related. erc already has C-c C-b for an iswitchb with
+    only erc buffers. want something similar the other way
+    around. maybe also with better grouping. Code for grouping
+    definitions can be stolen from [[http://www.emacswiki.org/emacs/IbufferMode#toc6][there]].
+* less manual filling
+  - there's auto-fill-mode and adaptive fill and whatnot. i need to
+    figure out how to enable something like that when it's actually
+    necessary. hardcoding lists of modes, applying hooks to those, or
+    whatever is suck, and so is enabling it always, without giving it
+    any thought.
+* flyspell improvements
+  - same issue as with auto-fill
+  - setting which dictionary to use all the time is lame. i should
+    automate that at least for erc buffers for non-english channels.
+  - would be nice if it could be teached about certain commonly used
+    technical terms
+  - should be able to ignore case in many circumstances. for example
+    erc, todo files, anything that isn't supposed to be "proper" text
+* shell stuff
+  - eshell
+    - lisp only. very nicely integrated. very easy to integrate and
+      customize further
+    - sucks on ansi escape sequences, including weird colors, and
+      especially with pagers and similar ncurses stuff
+    - also doesn't make a bad lisp repl with eldoc and all
+  - ansi-term
+    - most things just work in it
+    - very bad integration with other emacs things. i.e. making 'vi'
+      call find-file, unless sever/daemon is configured, and the shell
+      aliases the command to emacsclient
+    - allows using a proper shell, with all its features
+  - term
+    - sort of between eshell and ansi-term.
+    - completion and shit is well integrated. allows using proper
+      shells, but mostly in dumb mode, due to limited term
+      capabilities
+    - many term things still break
+    - some emacsish things still can't be integrated very tightly
+
+
+  eshell is probably the way to go in the long run. very annoying to
+  get used to. keeping at least one of term or ansi-term around and
+  configured won't hurt either for a couple term-heavy apps.
+
+  term can also be used to run term-heavy commands within eshell. that
+  way htop and things like that work rather well. figure out if that
+  can easily be made to use ansi-term as well, so one would get colors
+  as well. it needs to be configured on a per-app basis, but still
+  it's better than having to decide what terminal to use based on the
+  application to run.
+
+* opening links
+  - clicking is fail, especially as it modifies the clipboard and,
+    probably due to suboptimal word-chars, doesn't work well as a
+    "copy-to-clipboard" thing either. also modifies point, which is
+    annoying, especially in erc buffers
+  - there's goto-address-at-point and similar, but it requires moving
+    the point. something like
+      (save-excursion
+        (goto-address-at-point (re-search-backwards uri-pattern)))
+    might just do the trick, if bound to a proper key. C-delete
+    wouldn't be bad. using a prefix arg for opening the n-th link
+    backwards would also rock.
+
+* trailing whitespace
+  show-trailing-whitespace is very good and useful, but both enabling
+  it or everything that needs it, or disabling for everything that
+  shouldn't use it, like i currently do, sucks. a good rule of thumb
+  to enable it would probably be "every buffer that's associated with
+  a real file"
+
+* working with pastes or anything else from the web
+  - new buffer + M-1 M-! curl is lame
+
+* disable vcs stuff by default
+  - takes ages to init on huge projects
+  - i don't use it anyway
+  - magit is much more fun, if i were to use anything like it

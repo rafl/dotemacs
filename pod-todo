@@ -27,3 +27,8 @@
 * Custom faces for headings
   - sort of like in latex-mode
   - (defface ...
+* Make flyspelling easier
+** make enabling easy
+   - M-x customize-var pod-flyspell, or whatever
+** filter stuff before passing it on to ispell
+   - pod escapes and shit aren't errors
