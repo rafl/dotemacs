@@ -26,11 +26,15 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "bitstream" :family "Bitstream Vera Sans Mono"))))
+ '(default ((t (:stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "bitstream" :family "Bitstream Vera Sans Mono"))))
  '(cperl-array-face ((((class color) (background light)) (:foreground "yellow4"))))
  '(cperl-hash-face ((((class color) (background light)) (:foreground "cyan3"))))
  '(cperl-invalid-face default)
  '(flymake-errline ((((class color) (background light)) (:background "brightred" :weight bold))))
+ '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "orchid3"))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "firebrick1"))))
+ '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "purple4" :weight bold))))
+ '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "red2"))))
+ '(font-lock-variable-name-face ((((class color) (min-colors 88) (background light)) (:foreground "orange"))))
  '(rcirc-dim-nick ((t (:inherit default :foreground "grey" :strike-through t))))
  '(region ((((class color) (min-colors 88) (background light)) (:background "darkgrey")))))
