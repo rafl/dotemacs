@@ -9,6 +9,7 @@
         (4044 "zuhl")
         (4045 "bitlbee")))
 
+;; don't worry about this being public. the proxies on goatse only
+;; bind to localhost, and connections are being tunneled. all the
+;; other users on goatse can be trusted, RIGHT?!
 (setf rafl-irc-password "zqym-sxmh")
-
-;(rafl-irc-connect-all)
