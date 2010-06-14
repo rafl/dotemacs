@@ -47,7 +47,7 @@
 (setq completion-ignore-case t)
 
 ;; always indent new lines by default
-(global-set-key "\r" 'newline-and-indent)
+(global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (setq require-final-newline 'visit-save)
