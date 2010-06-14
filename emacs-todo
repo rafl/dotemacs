@@ -21,7 +21,7 @@
   - doesn't suffer from the daemon issue, but utter failure otherwise
 * cperl mode package name highlight
   - yes, package names *can* contain digits
-    Pod::Elemental::Element::Pod5::Command
+    e.g. Pod::Elemental::Element::Pod5::Command
 * cperl string highlighting
   - no, "@Foo" is *not* an array
   - especially hateful in heredocs without interpolation

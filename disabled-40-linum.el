@@ -1,5 +1,5 @@
-;(require 'linum)
-;(global-linum-mode 1)
+(require 'linum)
+(global-linum-mode 1)
 
 ; the default, except with right alignment
 (setq linum-format
