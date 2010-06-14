@@ -19,9 +19,6 @@
     it's already M-x customized
 ** emacs server
   - doesn't suffer from the daemon issue, but utter failure otherwise
-* global command history
-  (require 'session)
-  (add-hook 'after-init-hook 'session-initialize)
 * cperl mode package name highlight
   - yes, package names *can* contain digits
     Pod::Elemental::Element::Pod5::Command
