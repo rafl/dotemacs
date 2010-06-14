@@ -52,9 +52,20 @@
 
 (setq require-final-newline 'visit-save)
 
+;; mouse stuff
+(setq
+ mouse-1-click-in-non-selected-windows nil
+ mouse-yank-at-point t)
+(mouse-avoidance-mode 'exile)
+
+(set-default
+ 'show-trailing-whitespace t)
+
 (add-hook 'help-mode-hook
           (lambda ()
             (setq show-trailing-whitespace nil)))
 
 (setq fill-column 80)
+
+;; FIXME: doesn't work anymore
 (highlight-beyond-fill-column)

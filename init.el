@@ -14,12 +14,10 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(indicate-empty-lines t)
- '(mouse-1-click-in-non-selected-windows nil)
- '(mouse-avoidance-mode (quote exile) nil (avoid))
- '(mouse-yank-at-point t)
- '(safe-local-variable-values (quote ((c-indentation-style . bsd))))
- '(show-trailing-whitespace t))
+ '(safe-local-variable-values (quote ((c-indentation-style . bsd)))))
+
+;; FIXME: this is pretty fucked up for a cli emacs. especially on dark
+;; background
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
