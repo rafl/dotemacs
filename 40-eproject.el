@@ -1,6 +1,11 @@
 (require 'eproject)
 (require 'eproject-extras)
 
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (when (buffer-file-name)
+              (eproject-maybe-turn-on))))
+
 (define-project-type perl (generic)
   (or (look-for "dist.ini") (look-for "Makefile.PL") (look-for "Build.PL"))
   :relevant-files ("\\.pm$" "\\.pod$" "\\.t$" "\\.pl$" "\\.PL$" "dist\\.ini$")

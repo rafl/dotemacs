@@ -66,8 +66,8 @@
 (setq-default show-trailing-whitespace nil)
 (add-hook 'after-change-major-mode-hook
           (lambda ()
-              (when (buffer-file-name)
-                (setq show-trailing-whitespace t))))
+            (when (buffer-file-name)
+              (setq show-trailing-whitespace t))))
 
 (setq fill-column 80)
 
