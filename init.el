@@ -27,6 +27,7 @@
  '(cperl-array-face ((((class color) (background light)) (:foreground "yellow4"))))
  '(cperl-hash-face ((((class color) (background light)) (:foreground "cyan3"))))
  '(cperl-invalid-face default)
+ '(erc-current-nick-face ((t (:foreground "green3" :weight bold))))
  '(flymake-errline ((((class color) (background light)) (:background "brightred" :weight bold))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "orchid3"))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background light)) (:foreground "firebrick1"))))
