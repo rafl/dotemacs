@@ -12,6 +12,7 @@
 * improve startup time
 ** byte compile
    - not a huge win
+   - actually causes trouble sometimes
 ** concat files
 ** more autoload-ing
 ** emacs daemon
@@ -101,3 +102,9 @@
 
 * working with pastes or anything else from the web
   - new buffer + M-1 M-! curl is lame
+
+* tramp
+  - seems really quite slow, at least when compared to an actual
+    remote shell in a proper terminal. fixable?
+  - screws up sometimes. especially when trying to work as root
+    locally, i.e. when sudoing in eshell. 'sudo su', etc.
