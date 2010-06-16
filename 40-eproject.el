@@ -12,7 +12,7 @@
   :irrelevant-files ("inc/" "blib/" ".build/" "cover_cb/" "\\.tar\\.gz$")
   :file-name-map (lambda (root)
                    (lambda (root file)
-                     (cond ((string-match "^lib/\\(.+\\)[.]\\(pm|pod)$" file)
+                     (cond ((string-match "^lib/\\(.+\\)[.]\\(pm|pod\\)$" file)
                             (let ((m (string-match 1 file)))
                               (while (string-match "/" m)
                                 (setf m (replace-match "::" nil nil m)))
