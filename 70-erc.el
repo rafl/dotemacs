@@ -34,7 +34,7 @@
  ;; records, so this is turned off by default.
  erc-bbdb-auto-create-on-join-p nil
  erc-bbdb-auto-create-on-nick-p nil
- erc-bbdb-auto-create-on-whois-p t
+ erc-bbdb-auto-create-on-whois-p nil
  erc-fill-column 92
  erc-hide-list '("JOIN" "PART" "QUIT")
  erc-join-buffer 'bury
