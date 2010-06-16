@@ -62,4 +62,6 @@
  erc-track-shorten-start 2
  erc-track-switch-direction 'importance
  erc-truncate-mode t
- erc-whowas-on-nosuchnick t)
+ erc-whowas-on-nosuchnick t
+ erc-server-send-ping-interval 10
+ erc-server-send-ping-timeout 40)
