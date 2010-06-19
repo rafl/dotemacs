@@ -3,7 +3,8 @@
 
 (add-hook 'after-change-major-mode-hook
           (lambda ()
-            (when (buffer-file-name)
+            (when (and (buffer-file-name)
+                       (not eproject-root))
               (eproject-maybe-turn-on))))
 
 (define-project-type perl (generic)
