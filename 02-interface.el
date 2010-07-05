@@ -80,5 +80,4 @@
             (highlight-beyond-fill-column)))
 
 ;; highlight current line
-(when (window-system)
-  (global-hl-line-mode t))
+(global-hl-line-mode t)
