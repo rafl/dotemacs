@@ -16,10 +16,9 @@
 
 (setq auto-mode-alist (cons '("\\.t$" . cperl-mode) auto-mode-alist))
 
-(require 'flymake)
-
-(add-hook 'cperl-mode-hook
-          (lambda () (flymake-mode 1)))
+;; (require 'flymake)
+;; (add-hook 'cperl-mode-hook
+;;           (lambda () (flymake-mode 1)))
 
 (defadvice flymake-perl-init (around flymake-eproject-perl5lib)
   (let* ((project-root (ignore-errors (eproject-maybe-turn-on)))
