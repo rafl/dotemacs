@@ -7,7 +7,6 @@
    - not a huge win
    - actually causes trouble sometimes
 ** concat files
-** more autoload-ing
 ** emacs daemon
   - doesn't seem too bad, but comes with massive suck when using
     customized fonts. both in gui and cli mode. needs more special
