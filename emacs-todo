@@ -1,7 +1,3 @@
-* implicit make-directory for found files in new dirs
-  - only with confirmation
-  - visit-hook + file-exists-p + make-directory
-
 * cperl mode package name highlight
   - yes, package names *can* contain digits
     e.g. Pod::Elemental::Element::Pod5::Command
