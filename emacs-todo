@@ -3,9 +3,6 @@
   - visit-hook + file-exists-p + make-directory
 
 * improve startup time
-** byte compile
-   - not a huge win
-   - actually causes trouble sometimes
 ** concat files
 ** emacs daemon
   - doesn't seem too bad, but comes with massive suck when using

@@ -3,11 +3,7 @@
   "The full path to the emacs config directory")
 
 (dolist (file (directory-files emacs-conf-path t "^[0-9]+.*\\.el$"))
-  (let* ((compiled-file (concat file "c"))
-         (loaded-elc (ignore-errors (load compiled-file))))
-    (when (not loaded-elc)
-      (message (format "failed to load %s - falling back to %s" compiled-file file))
-      (load file))))
+  (load file))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
