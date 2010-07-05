@@ -69,6 +69,7 @@
               (setq show-trailing-whitespace t))))
 
 (setq fill-column 80)
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (highlight-beyond-fill-column)))
 
-;; FIXME: doesn't work anymore
-(highlight-beyond-fill-column)
