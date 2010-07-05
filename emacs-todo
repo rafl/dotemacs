@@ -2,15 +2,6 @@
   - only with confirmation
   - visit-hook + file-exists-p + make-directory
 
-* improve startup time
-** emacs daemon
-  - doesn't seem too bad, but comes with massive suck when using
-    customized fonts. both in gui and cli mode. needs more special
-    configuration to set that up again properly for clients, even if
-    it's already M-x customized
-** emacs server
-  - doesn't suffer from the daemon issue, but utter failure otherwise
-
 * cperl mode package name highlight
   - yes, package names *can* contain digits
     e.g. Pod::Elemental::Element::Pod5::Command
