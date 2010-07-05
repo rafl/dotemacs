@@ -3,7 +3,6 @@
   - visit-hook + file-exists-p + make-directory
 
 * improve startup time
-** concat files
 ** emacs daemon
   - doesn't seem too bad, but comes with massive suck when using
     customized fonts. both in gui and cli mode. needs more special
