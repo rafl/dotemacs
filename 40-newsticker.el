@@ -1,5 +1,3 @@
-(require 'newsticker)
-
 (setq
  newsticker-html-renderer 'w3m-region
  newsticker-date-face '((t (:slant italic :height 1.0 :family "helvetica")))

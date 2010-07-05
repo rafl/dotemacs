@@ -1,5 +1,3 @@
-(require 'eshell)
-
 (setq
  eshell-buffer-name "*shell*"
  eshell-banner-message ""

@@ -1,7 +1,3 @@
-(require 'erc)
-(require 'erc-bbdb)
-(require 'erc-networks)
-
 ;; don't use the NETWORK declared by the server or the server hostname
 ;; as the name of the network. instead, ask
 ;; `rafl-irc-networks-port-to-network'.

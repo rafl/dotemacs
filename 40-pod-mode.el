@@ -1,6 +1,3 @@
-(require 'pod-mode)
-(setq auto-mode-alist (append auto-mode-alist '(("\\.pod$" . pod-mode))))
+(autoload 'pod-mode "pod-mode" nil t)
 
-;(require 'weaver-mode)
-;(defalias 'pod-mode 'weaver-mode)
-;(setq auto-mode-alist (cons '("\\.pod$" . weaver-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.pod$" . pod-mode))

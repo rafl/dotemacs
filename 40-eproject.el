@@ -1,5 +1,17 @@
 (require 'eproject)
-(require 'eproject-extras)
+
+(dolist (func '(eproject-compile
+                eproject-eshell-cd-here
+                eproject-multi-isearch-buffers
+                eproject-todo
+                eproject-grep
+                eproject-revisit-project
+                eproject-project-root
+                eproject-open-all-project-files
+                eproject-kill-project-buffers
+                eproject-ibuffer
+                eproject-find-file))
+  (autoload func "eproject-extras"))
 
 (add-hook 'after-change-major-mode-hook
           (lambda ()
