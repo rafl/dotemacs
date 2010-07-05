@@ -3,6 +3,16 @@
 (tool-bar-mode 0)
 (scroll-bar-mode -1)
 
+;; fonts
+(setq default-frame-alist
+      (append
+       default-frame-alist
+       '((font . "Bitstream Vera Sans Mono-8")
+         (cons background-color
+               ,(if (window-system) "white" "black"))
+         (cons foreground-color
+               ,(if (window-system) "black" "white")))))
+
 ;; stop cursor from blinking
 (blink-cursor-mode 0)
 
@@ -30,10 +40,6 @@
 
 ;; make "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;; custom colors
-(set-background-color "white")
-(set-foreground-color "black")
 
 ;; switching
 (iswitchb-mode 1)
