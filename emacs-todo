@@ -1,10 +1,3 @@
-* C-p in minibuffer, sometimes. M-x buffer is one example.
-  - define-key?
-  - local-set-key?
-  - also, all the history is sort of in one namespace. earlier values
-    entered in a minibuffer for replace-regexp, or whatever, are not
-    at all useful in an M-x minibuffer.
-
 * implicit make-directory for found files in new dirs
   - only with confirmation
   - visit-hook + file-exists-p + make-directory
