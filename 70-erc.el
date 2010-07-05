@@ -45,7 +45,7 @@
  erc-modules
  '(autoaway autojoin button completion fill irccontrols list match menu
    move-to-prompt netsplit networks noncommands readonly ring
-   scrolltobottom stamp spelling track truncate bbdb)
+   scrolltobottom stamp spelling track truncate)
  erc-query-display 'bury
  erc-timestamp-format "[%H:%M:%S]"
  erc-timestamp-format-right " [%H:%M:%S]"
