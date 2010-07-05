@@ -1,14 +1,6 @@
 * hide pod, also in cperl
-  - outline? OMGSLOW11 (no, really, *really*, *REALLY* slow)
-  - folding? doesn't look bad, but apparently only does substring
-    matching, so can't do /^=cut/ et al properly
-  - hideshow? looks good. needs custom function for moving a block
-    forward. c.f. [[http://blogs.msdn.com/b/dotnetinterop/archive/2008/04/14/making-hideshow-el-work-with-csharp-mode-el-and-region-endregion.aspx][HideShow for C# regions]]
-  - [[http://www.emacswiki.org/emacs/HideIfDef][HideIfDef]] does something similar
-  - [[http://www.emacswiki.org/emacs/HideRegion][HideRegion]]
-  - [[http://www.emacswiki.org/emacs/HideLines][HideLines]]
-  - [[http://www.emacswiki.org/emacs/HighLight][HighLight]] also implements some sort of hiding, but is quite likely
-    not exactly what i want
+  - outline mode works fine in pod-mode, except it's really slow with
+    linum-mode enabled
 * automatic pod escape generation
 * completion lowercases the word being completed
   - very annoying when completion module names
