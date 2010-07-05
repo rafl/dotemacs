@@ -111,6 +111,8 @@ most importantly not screwing up as hard as c mode on the latter - it
 interprets them as labels and therefore gets everything else rather
 wrong.
 
+There's [[http://github.com/emacsmirror/xs-mode/blob/emacswiki/xs-mode.el][prior art]].
+
 * M-x perlbug
 
 * debug-on-error with M-x?
