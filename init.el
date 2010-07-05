@@ -34,5 +34,6 @@
  '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "purple4" :weight bold))))
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "red2"))))
  '(font-lock-variable-name-face ((((class color) (min-colors 88) (background light)) (:foreground "orange"))))
+ '(hl-line ((t (:inherit highlight :background "DarkSeaGreen1"))))
  '(rcirc-dim-nick ((t (:inherit default :foreground "grey" :strike-through t))))
  '(region ((((class color) (min-colors 88) (background light)) (:background "darkgrey")))))
