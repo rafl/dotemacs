@@ -73,3 +73,5 @@
           (lambda ()
             (highlight-beyond-fill-column)))
 
+;; highlight current line
+(global-hl-line-mode t)
