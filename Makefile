@@ -1,8 +1,8 @@
-LISP_FILES = $(shell find . -type f -name '*.el')
+LISP_FILES = $(shell find . host -type f -name '*.el' -maxdepth 1)
 COMPILED_LISP_FILES = $(patsubst %.el,%.elc,$(LISP_FILES))
 
 %.elc: %.el
-	emacs --batch --eval '(if (not (byte-compile-file "$<")) (error "compilation error"))' > $@
+	emacs --batch --eval '(progn (add-to-list (quote load-path) "$(PWD)/packages") (if (not (byte-compile-file "$<")) (error "compilation error")))' > $@
 
 all: compile_all
 
