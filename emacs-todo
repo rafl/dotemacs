@@ -106,5 +106,23 @@
 * tramp
   - seems really quite slow, at least when compared to an actual
     remote shell in a proper terminal. fixable?
+    - seems alright, although still noticable on local
+      networks. probably nothing one can do
   - screws up sometimes. especially when trying to work as root
     locally, i.e. when sudoing in eshell. 'sudo su', etc.
+
+* xs-mode
+
+extension to c mode. highlighting for perlapi and xsubpp keywords, and
+most importantly not screwing up as hard as c mode on the latter - it
+interprets them as labels and therefore gets everything else rather
+wrong.
+
+* M-x perlbug
+
+* debug-on-error with M-x?
+
+When executing an interactive form with M-x, no debugging editing
+level level is entered on error. However, with global debug-on-error
+enabled, recursive editing is done even on errors which are later
+catched. Massive suck when implementing and testing interactive forms.
