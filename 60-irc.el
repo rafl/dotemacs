@@ -1,6 +1,3 @@
-(require 'rcirc)
-(require 'rcirc-late-fix)
-
 (defvar rafl-irc-networks nil
   "a list of my irc ports and their network names")
 
