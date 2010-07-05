@@ -3,15 +3,12 @@
 (tool-bar-mode 0)
 (scroll-bar-mode -1)
 
-;; fonts
-(setq default-frame-alist
-      (append
-       default-frame-alist
-       '((font . "Bitstream Vera Sans Mono-8")
-         (cons background-color
-               ,(if (window-system) "white" "black"))
-         (cons foreground-color
-               ,(if (window-system) "black" "white")))))
+;; defaults for graphical frames. important because emacsclient -c
+;; doesn't respect the font of the default face.
+(setq window-system-default-frame-alist
+      '((x (font . "Bitstream Vera Sans Mono-8")
+           (background-color . "white")
+           (foreground-color . "black"))))
 
 ;; stop cursor from blinking
 (blink-cursor-mode 0)
