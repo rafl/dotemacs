@@ -2,9 +2,6 @@
   - outline mode works fine in pod-mode, except it's really slow with
     linum-mode enabled
 * automatic pod escape generation
-* completion lowercases the word being completed
-  - very annoying when completion module names
-  - solve by using another completer? hippie expand?
 * flymake hooks for podchecker
 ** hook in pod-mode, register in user conf
 * Marking L<links> to be able to open them with C-c C-o
