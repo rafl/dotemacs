@@ -71,7 +71,7 @@
             (when (buffer-file-name)
               (setq show-trailing-whitespace t))))
 
-(setq fill-column 80)
+(set-default 'fill-column 80)
 (add-hook 'after-change-major-mode-hook
           (lambda ()
             (highlight-beyond-fill-column)))
