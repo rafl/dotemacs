@@ -15,6 +15,6 @@
   (interactive
    (list (read-string "URL: ")))
   (with-current-buffer (get-buffer-create url)
-    (if (not (insert-url url))
+    (if (not (ignore-errors (insert-url url)))
         (kill-buffer)
       (pop-to-buffer (current-buffer)))))
