@@ -18,17 +18,12 @@
 * Marking L<links> to be able to open them with C-c C-o
 ** L<> stuff already exists
 ** parse to link -> local keybinding in pod mode
-* Interactively generating L<links|To/something>
-  - is it desc|href or href|desc?
-  - what's the delimiter for fragments again?
-  - how's that section i want to link to actually called?
 * indenting of verbatim paras
   - will be fixed with pod-cperl-mode by using cperl in verbatim
-* Custom faces for headings
-  - sort of like in latex-mode
-  - (defface ...
-* Make flyspelling easier
-** make enabling easy
-   - M-x customize-var pod-flyspell, or whatever
+* flyspell improvements
 ** filter stuff before passing it on to ispell
    - pod escapes and shit aren't errors
+   - massive suck. flyspell insists on parsing itself, and only has
+     two builtin parsers for normal text and tex.
+* nested commands without different quote chars
+  - C<I<username>@B<machine>>
