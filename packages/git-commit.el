@@ -24,46 +24,54 @@
   :group 'git-commit)
 
 (defface git-commit-summary-face
-  '((((class grayscale) (background light)) (:foreground "DimGray" :slant italic))
-    (((class grayscale) (background dark)) (:foreground "LightGray" :slant italic))
-    (((class color) (min-colors 88) (background light)) (:foreground "VioletRed4"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "LightSalmon"))
-    (((class color) (min-colors 16) (background light)) (:foreground "RosyBrown"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "LightSalmon"))
+  '((default (:weight bold))
+    (((class grayscale) (background light))
+     (:foreground "DimGray" :slant italic))
+    (((class grayscale) (background dark))
+     (:foreground "LightGray" :slant italic))
+    (((class color) (min-colors 88) (background light))
+     (:foreground "VioletRed4"))
+    (((class color) (min-colors 88) (background dark))
+     (:foreground "LightSalmon"))
+    (((class color) (min-colors 16) (background light))
+     (:foreground "RosyBrown"))
+    (((class color) (min-colors 16) (background dark))
+     (:foreground "LightSalmon"))
     (((class color) (min-colors 8)) (:foreground "green"))
     (t (:slant italic)))
   "Face used to highlight the summary in git commit messages"
   :group 'git-commit-faces)
 
 (defface git-commit-overlong-summary-face
-  '((((class color) (min-colors 88) (background light)) (:foreground "Red1" :weight bold))
-    (((class color) (min-colors 88) (background dark)) (:foreground "Pink" :weight bold))
-    (((class color) (min-colors 16) (background light)) (:foreground "Red1" :weight bold))
-    (((class color) (min-colors 16) (background dark)) (:foreground "Pink" :weight bold))
+  '((((class color) (min-colors 88) (background light))
+     (:foreground "Red1" :weight bold))
+    (((class color) (min-colors 88) (background dark))
+     (:foreground "Pink" :weight bold))
+    (((class color) (min-colors 16) (background light))
+     (:foreground "Red1" :weight bold))
+    (((class color) (min-colors 16) (background dark))
+     (:foreground "Pink" :weight bold))
     (((class color) (min-colors 8)) (:foreground "red"))
     (t (:inverse-video t :weight bold)))
   "Face used to highlight overlong parts of git commit message summaries"
   :group 'git-commit-faces)
 
 (defface git-commit-nonempty-second-line-face
-  '((((class color) (min-colors 88) (background light)) (:foreground "Red1" :weight bold))
-    (((class color) (min-colors 88) (background dark)) (:foreground "Pink" :weight bold))
-    (((class color) (min-colors 16) (background light)) (:foreground "Red1" :weight bold))
-    (((class color) (min-colors 16) (background dark)) (:foreground "Pink" :weight bold))
+  '((((class color) (min-colors 88) (background light))
+     (:foreground "Red1" :weight bold))
+    (((class color) (min-colors 88) (background dark))
+     (:foreground "Pink" :weight bold))
+    (((class color) (min-colors 16) (background light))
+     (:foreground "Red1" :weight bold))
+    (((class color) (min-colors 16) (background dark))
+     (:foreground "Pink" :weight bold))
     (((class color) (min-colors 8)) (:foreground "red"))
     (t (:inverse-video t :weight bold)))
   "Face used to highlight text on the second line of git commit messages"
   :group 'git-commit-faces)
 
 (defface git-commit-text-face
-  '((((class grayscale) (background light)) (:foreground "DimGray" :slant italic))
-    (((class grayscale) (background dark)) (:foreground "LightGray" :slant italic))
-    (((class color) (min-colors 88) (background light)) (:foreground "VioletRed4"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "LightSalmon"))
-    (((class color) (min-colors 16) (background light)) (:foreground "RosyBrown"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "LightSalmon"))
-    (((class color) (min-colors 8)) (:foreground "green"))
-    (t (:slant italic)))
+  '((t (:inherit default)))
   "Face used to highlight text in git commit messages"
   :group 'git-commit-faces)
 
@@ -88,7 +96,8 @@
   :group 'git-commit-faces)
 
 (defface git-commit-pseudo-header-face
-  '((((class grayscale) (background light)) (:foreground "LightGray" :weight bold))
+  '((((class grayscale) (background light))
+     (:foreground "LightGray" :weight bold))
     (((class grayscale) (background dark)) (:foreground "DimGray" :weight bold))
     (((class color) (min-colors 88) (background light)) (:foreground "Purple"))
     (((class color) (min-colors 88) (background dark)) (:foreground "Cyan1"))
@@ -99,21 +108,28 @@
   "Font used to hightlight pseudo headers in git commit messages"
   :group 'git-commit-faces)
 
-(defvar git-commit-known-pseudo-headers
+(defcustom git-commit-known-pseudo-headers
   '("Signed-off-by"
     "Acked-by"
     "Cc"
     "Reported-by"
     "Tested-by"
-    "Reviewed-by"))
+    "Reviewed-by")
+  "A list of git pseudo headers to be highlighted."
+  :group 'git-commit
+  :type '(repeat string))
 
 (defface git-commit-known-pseudo-header-face
   '((((class grayscale) (background light)) (:foreground "Gray90" :weight bold))
     (((class grayscale) (background dark)) (:foreground "DimGray" :weight bold))
-    (((class color) (min-colors 88) (background light)) (:foreground "ForestGreen"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "PaleGreen"))
-    (((class color) (min-colors 16) (background light)) (:foreground "ForestGreen"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "PaleGreen"))
+    (((class color) (min-colors 88) (background light))
+     (:foreground "ForestGreen"))
+    (((class color) (min-colors 88) (background dark))
+     (:foreground "PaleGreen"))
+    (((class color) (min-colors 16) (background light))
+     (:foreground "ForestGreen"))
+    (((class color) (min-colors 16) (background dark))
+     (:foreground "PaleGreen"))
     (((class color) (min-colors 8)) (:foreground "green"))
     (t (:weight bold :underline t)))
   "Face used to hightlight common pseudo headers in git commit messages"
@@ -124,17 +140,22 @@
      (:foreground "LightGray" :weight bold :underline t))
     (((class grayscale) (background dark))
      (:foreground "Gray50" :weight bold :underline t))
-    (((class color) (min-colors 88) (background light)) (:foreground "dark cyan"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "Aquamarine"))
-    (((class color) (min-colors 16) (background light)) (:foreground "CadetBlue"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "Aquamarine"))
+    (((class color) (min-colors 88) (background light))
+     (:foreground "dark cyan"))
+    (((class color) (min-colors 88) (background dark))
+     (:foreground "Aquamarine"))
+    (((class color) (min-colors 16) (background light))
+     (:foreground "CadetBlue"))
+    (((class color) (min-colors 16) (background dark))
+     (:foreground "Aquamarine"))
     (((class color) (min-colors 8)) (:foreground "magenta"))
     (t (:weight bold :underline t)))
   "Face used to highlight braces within notes in git commit messages"
   :group 'git-commit-faces)
 
 (defface git-commit-note-address-face
-  '((((class grayscale) (background light)) (:foreground "LightGray" :weight bold))
+  '((((class grayscale) (background light))
+     (:foreground "LightGray" :weight bold))
     (((class grayscale) (background dark)) (:foreground "DimGray" :weight bold))
     (((class color) (min-colors 88) (background light)) (:foreground "Purple"))
     (((class color) (min-colors 88) (background dark)) (:foreground "Cyan1"))
@@ -146,24 +167,36 @@
   :group 'git-commit-faces)
 
 (defface git-commit-note-face
-  '((((class grayscale) (background light)) (:foreground "DimGray" :slant italic))
-    (((class grayscale) (background dark)) (:foreground "LightGray" :slant italic))
-    (((class color) (min-colors 88) (background light)) (:foreground "VioletRed4"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "LightSalmon"))
-    (((class color) (min-colors 16) (background light)) (:foreground "RosyBrown"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "LightSalmon"))
+  '((((class grayscale) (background light))
+     (:foreground "DimGray" :slant italic))
+    (((class grayscale) (background dark))
+     (:foreground "LightGray" :slant italic))
+    (((class color) (min-colors 88) (background light))
+     (:foreground "VioletRed4"))
+    (((class color) (min-colors 88) (background dark))
+     (:foreground "LightSalmon"))
+    (((class color) (min-colors 16) (background light))
+     (:foreground "RosyBrown"))
+    (((class color) (min-colors 16) (background dark))
+     (:foreground "LightSalmon"))
     (((class color) (min-colors 8)) (:foreground "green"))
     (t (:slant italic)))
   "Face used to highlight notes within git commit messages"
   :group 'git-commit-faces)
 
 (defface git-commit-branch-face
-  '((((class grayscale) (background light)) (:foreground "DimGray" :slant italic))
-    (((class grayscale) (background dark)) (:foreground "LightGray" :slant italic))
-    (((class color) (min-colors 88) (background light)) (:foreground "VioletRed4"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "LightSalmon"))
-    (((class color) (min-colors 16) (background light)) (:foreground "RosyBrown"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "LightSalmon"))
+  '((((class grayscale) (background light))
+     (:foreground "DimGray" :slant italic))
+    (((class grayscale) (background dark))
+     (:foreground "LightGray" :slant italic))
+    (((class color) (min-colors 88) (background light))
+     (:foreground "VioletRed2"))
+    (((class color) (min-colors 88) (background dark))
+     (:foreground "LightSalmon"))
+    (((class color) (min-colors 16) (background light))
+     (:foreground "RosyBrown"))
+    (((class color) (min-colors 16) (background dark))
+     (:foreground "LightSalmon"))
     (((class color) (min-colors 8)) (:foreground "green"))
     (t (:slant italic)))
   "Face used to highlight the branch name in comments in git commit messages"
@@ -174,78 +207,66 @@
   "Face used when a commit is going to be made outside of any branches"
   :group 'git-commit-faces)
 
-(defface git-commit-comment-section-face
-  '((t :inherit git-commit-branch-face))
-  "Face used to highlight sections in git generated comments")
+(defface git-commit-comment-heading-face
+  '((t (:inherit git-commit-known-pseudo-header-face)))
+  "Face used to highlight section headings in the default
+comments in git commit messages"
+  :group 'git-commit-faces)
 
-;; TODO:
-;;  * "# Changes to be committed:"
-;;  * "# Untracked files:"
-;;  * "# Changed but not updated:"
-;;  * "# Unmerged paths:"
-;;  + files within those sections: "#\tfoo" or "#\tfoo:\s+bar"
+(defface git-commit-comment-file-face
+  '((t (:inherit git-commit-pseudo-header-face)))
+  "Face used to highlight file names in the default comments in
+git commit messages"
+  :group 'git-commit-faces)
+
+(defface git-commit-comment-action-face
+  '((t (:inherit git-commit-branch-face)))
+  "Face used to highlight what has happened to files in the
+default comments in git commit messages"
+  :group 'git-commit-faces)
+
 (defconst git-commit-font-lock-keywords-1
-  `(("^\\(#\s+On branch \\)\\(.*\\)$"
-     (1 'git-commit-comment-face)
-     (2 'git-commit-branch-face))
-    ("^\\(#\s+\\)\\(Not currently on any branch.\\)"
-     (1 'git-commit-comment-face)
-     (2 'git-commit-no-branch-face))
-    ;; FIXME: while the last outer capture does in fact match more
-    ;; than once, we can't really specify faces for all the matches it
-    ;; might produce. Instead of this insane multi-line expression, an
-    ;; anchored submatch highlight should be used instead. that could
-    ;; look something like
-    ;;
-    ;; ("to be commited:" (0 face) ("\t[^:]+.*$" nil nil (0 face)))
-    ;;
-    ;; this way we can mostly likely also use just one expression to
-    ;; cover all those sections at once, including the more weird shit
-    ;; with `->' in it, without accumulating huge amounts complicated
-    ;; and almost identical expressions
-    ;;
-    ;; or maybe not:
-    ;;
-    ;; ("^\\(#\s\\)\\(Changes to be committed:\\)\s*\n"
-    ;;  (1 'git-commit-comment-face)
-    ;;  (2 'git-commit-comment-section-face)
-    ;;  ("^#.*$" nil nil
-    ;;   (0 'git-commit-branch-face)
-    ;;   ;; stupid, stupid, fucking stupid font-lock. the anchored shit
-    ;;   ;; won't nest.
-    ;;   ("^\\(#\t+\\)\\([^\n:]+\\)\\(:\s+\\)\\(.*\\)\n" nil nil
-    ;;    (1 'git-commit-comment-face)
-    ;;    (2 'git-commit-branch-face) ; FIXME
-    ;;    (3 'git-commit-comment-face)
-    ;;    (4 'git-commit-pseudo-header-face)))) ; FIXME
-    (,(concat "^\\(#\s\\)\\(Changes to be committed:\\)\n\\(#.*\n\\)+?"
-              "\\(\\(#\t+\\)\\([^\n:]+\\)\\(:\s+\\)\\(.*\\)\n\\)+")
-     (1 'git-commit-comment-face)
-     (2 'git-commit-comment-section-face)
-     (3 'git-commit-comment-face)
-     (5 'git-commit-comment-face)
-     (6 'git-commit-branch-face) ; FIXME
-     (7 'git-commit-comment-face)
-     (8 'git-commit-pseudo-header-face)) ; FIXME
-    ("^#.*$"
-     (0 'git-commit-comment-face))
-    ("\\`\\(.\\{,50\\}\\)\\(.*?\\)\n\\(.*\\)$"
-     (1 'git-commit-summary-face)
-     (2 'git-commit-overlong-summary-face)
-     (3 'git-commit-nonempty-second-line-face))
-    (,(concat "^\\(" (regexp-opt git-commit-known-pseudo-headers)
-              ":\\)\\(\s.*\\)$")
-     (1 'git-commit-known-pseudo-header-face)
-     (2 'git-commit-pseudo-header-face))
-    ("^\\w[^\s\n]+:\s.*$"
-     (0 'git-commit-pseudo-header-face))
-    ("^\\(\\[\\)\\([^\s@]+@[^\s@]+:\\)\\(.*\\)\\(\\]\\)$"
-     (1 'git-commit-note-brace-face)
-     (2 'git-commit-note-address-face)
-     (3 'git-commit-note-face)
-     (4 'git-commit-note-brace-face))
-    (".*"
-     (0 'git-commit-text-face))))
+  (append
+   '(("^\\(#\s+On branch \\)\\(.*\\)$"
+      (1 'git-commit-comment-face)
+      (2 'git-commit-branch-face)))
+   (loop for exp in
+         '(("Not currently on any branch." . git-commit-no-branch-face)
+           ("Changes to be committed:"     . git-commit-comment-heading-face)
+           ("Untracked files:"             . git-commit-comment-heading-face)
+           ("Changed but not updated:"     . git-commit-comment-heading-face)
+           ("Unmerged paths:"              . git-commit-comment-heading-face))
+         collect `(,(concat "^\\(#\s+\\)\\(" (car exp) "\\)$")
+                   (1 'git-commit-comment-face)
+                   (2 ',(cdr exp))))
+   `(("^\\(#\t\\)\\([^:]+\\)\\(:\s+\\)\\(.*\\)$"
+      (1 'git-commit-comment-face)
+      (2 'git-commit-comment-action-face)
+      (3 'git-commit-comment-face)
+      (4 'git-commit-comment-file-face))
+     ("^\\(#\t\\)\\(.*\\)$"
+      (1 'git-commit-comment-face)
+      (2 'git-commit-comment-file-face))
+     ("^#.*$"
+      (0 'git-commit-comment-face))
+     ("\\`\\(.\\{,50\\}\\)\\(.*?\\)\n\\(.*\\)$"
+      (1 'git-commit-summary-face)
+      (2 'git-commit-overlong-summary-face)
+      (3 'git-commit-nonempty-second-line-face))
+     (,(concat "^\\("
+               (regexp-opt git-commit-known-pseudo-headers)
+               ":\\)\\(\s.*\\)$")
+      (1 'git-commit-known-pseudo-header-face)
+      (2 'git-commit-pseudo-header-face))
+     ("^\\w[^\s\n]+:\s.*$"
+      (0 'git-commit-pseudo-header-face))
+     ("^\\(\\[\\)\\([^\s@]+@[^\s@]+:\\)\\(.*\\)\\(\\]\\)$"
+      (1 'git-commit-note-brace-face)
+      (2 'git-commit-note-address-face)
+      (3 'git-commit-note-face)
+      (4 'git-commit-note-brace-face))
+     (".*"
+      (0 'git-commit-text-face)))))
 
 (defvar git-commit-font-lock-keywords git-commit-font-lock-keywords-1)
 
@@ -282,23 +303,19 @@ configuration key KEY."
            (with-current-buffer
                standard-output
              (setq exit
-                   (call-process "git" nil (list t nil) nil "config" "--get" key))))))
+                   (call-process "git" nil (list t nil) nil
+                                 "config" "--get" key))))))
     (if (not (= 0 exit))
         nil
       (substring output 0 (- (length output) 1)))))
 
-;; this is horrible. i should figure out enough elisp to make it
-;; slightly less horrible.
 (defun git-commit-first-env-var (&rest vars)
   "Get the value of the first defined environment variable.
 Walk VARS, call `getenv' on each element and return the first
 non-nil return value of `getenv'."
-  (let ((res)
-        (i vars))
-    (while (and (not res) i)
-      (setq res (getenv (car i)))
-      (setq i (cdr i)))
-    res))
+  (loop for var in vars
+        do (let ((val (getenv var)))
+             (when val (return val)))))
 
 (defun git-commit-committer-name ()
   "Get the git committer name of the current user.
@@ -536,6 +553,7 @@ NOTE defaults to `current-prefix-arg'."
     (define-key map (kbd "C-c C-p") 'git-commit-reported)
     map))
 
+;;;###autoload
 (defun git-commit-mode ()
   "Major mode for editing git commit messages.
 This mode helps with editing git commit messages both by
@@ -561,6 +579,7 @@ Turning on git commit calls the hooks in `git-commit-mode-hook'."
   (run-hooks 'git-commit-mode-hook)
   (setq mode-name "Git-Commit"))
 
+;;;###autoload
 (add-to-list 'auto-mode-alist
              '("COMMIT_EDITMSG" . git-commit-mode))
 
