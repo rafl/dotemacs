@@ -10,7 +10,8 @@
                 eproject-open-all-project-files
                 eproject-kill-project-buffers
                 eproject-ibuffer
-                eproject-find-file))
+                eproject-find-file
+                eproject-ifind-file))
   (autoload func "eproject-extras"))
 
 (add-hook 'after-change-major-mode-hook
