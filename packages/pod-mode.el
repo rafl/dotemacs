@@ -50,9 +50,7 @@
 ;;;
 ;;; To associate pod-mode with .pod files add the following to your ~/.emacs
 ;;;
-;;;    (setq auto-mode-alist
-;;;       (append auto-mode-alist
-;;;         '(("\\.pod$" . pod-mode))))
+;;;    (add-to-list 'auto-mode-alist '("\\.pod$" . pod-mode))
 ;;;
 ;;;
 ;;; To automatically turn on font-lock-mode add the following to your ~/.emacs
@@ -226,10 +224,9 @@ escapes."
              `(,(format "^\\(=head%d\\)\\(.*\\)" n)
                (1 (quote ,head-face-name))
                (2 (quote ,text-face-name)))))
-     `((,(concat "^\\(="
+     `((,(format "^\\(=%s\\)\\(.*\\)"
                  (regexp-opt '("item" "over" "back" "cut" "pod"
-                               "for" "begin" "end" "encoding"))
-                 "\\)\\(.*\\)")
+                               "for" "begin" "end" "encoding")))
         (1 'pod-mode-command-face)
         (2 'pod-mode-command-text-face))))
     "Minimal highlighting expressions for POD mode."))
@@ -339,13 +336,13 @@ additional pod commands."
       (save-match-data
         (goto-char (point-min))
         (loop while (re-search-forward
-                     (concat "^="
+                     (format "^=%s\s+\\(.*\\)$"
                              (regexp-opt
                               (append
                                (loop for i from 1 to 4
-                                     collect (concat "head" (int-to-string i)))
-                               section-keywords))
-                             "\s+\\(.*\\)$")
+                                     collect (format "head%d" i))
+                               '("item")
+                               section-keywords)))
                      nil t)
               collect (match-string-no-properties 1))))))
 
@@ -400,7 +397,7 @@ version of the module list will be discarded and rebuilt."
     (when (ignore-errors (require 'perldoc))
       (when (or re-cache (not perldoc-modules-alist))
         (message "Building completion list of all perl modules..."))
-      (perldoc-modules-alist re-cache))))
+      (mapcar (lambda (i) (car i)) (perldoc-modules-alist re-cache)))))
 
 (defun pod-link (link &optional text)
   "Insert a POD hyperlink formatting code.
@@ -415,6 +412,46 @@ that's not whitespace, it will be used as the link title."
                     (concat text "|"))
                   link
                   ">")))
+
+(defun pod-completing-read (prompt choices)
+  "Use `completing-read' to do a completing read."
+  (completing-read prompt choices))
+
+(defun pod-icompleting-read (prompt choices)
+  "Use iswitchb to do a completing read."
+  (let ((iswitchb-make-buflist-hook
+         (lambda ()
+           (setq iswitchb-temp-buflist choices))))
+    (unwind-protect
+        (progn
+          (when (not iswitchb-mode)
+            (add-hook 'minibuffer-setup-hook 'iswitchb-minibuffer-setup))
+          (iswitchb-read-buffer prompt))
+      (when (not iswitchb-mode)
+        (remove-hook 'minibuffer-setup-hook 'iswitchb-minibuffer-setup)))))
+
+(defun pod-ido-completing-read (prompt choices)
+  "Use ido to do a completing read."
+  (ido-completing-read prompt choices))
+
+(defcustom pod-completing-read-function
+  #'pod-icompleting-read
+  "Ask the user to select a single item from a list.
+Used by `pod-link-section', `pod-link-module', and
+`pod-link-module-section'."
+  :group 'pod-mode
+  :type '(radio (function-item
+                 :doc "Use Emacs' standard `completing-read' function."
+                 pod-completing-read)
+                (function-item :doc "Use iswitchb's completing-read function."
+                               pod-icompleting-read)
+                (function-item :doc "Use ido's completing-read function."
+                               pod-ido-completing-read)
+                (function)))
+
+(defun pod-do-completing-read (&rest args)
+  "Do a completing read with the configured `pod-completing-read-function'."
+  (apply pod-completing-read-function args))
 
 (defun pod-link-uri (uri &optional text)
   "Insert POD hyperlink formatting code for a URL.
@@ -432,13 +469,13 @@ minibuffer."
 Insert an L<> formatting code pointing to a section within the
 current document.
 
-When called interactively, SECTION and TEXT will be read from the
-minibuffer.
+When called interactively, SECTION and TEXT will be read using
+`pod-do-completing-read'.
 
-For SECTION, `pod-linkable-sections' will be used to provide
-completions within the minibuffer."
+When reading SECTION, `pod-linkable-sections' will be used to
+provide completions."
   (interactive
-   (list (completing-read "Section: " (pod-linkable-sections) nil nil)
+   (list (pod-do-completing-read "Section: " (pod-linkable-sections))
          (read-string "Text: ")))
   (pod-link-module-section "" section text))
 
@@ -446,14 +483,14 @@ completions within the minibuffer."
   "Insert POD hyperlink formatting code for a module.
 Insert an L<> formatting code pointing to a MODULE.
 
-When called interactively, MODULE and TEXT will be read from the
-minibuffer.
+When called interactively, MODULE and TEXT will be read using
+`pod-do-completing-read'.
 
-When reading MODULE from the minibuffer, `pod-linkable-modules'
-will be used to provide completions."
+When reading MODULE, `pod-linkable-modules' will be used to
+provide completions."
   (interactive
-   (list (completing-read "Module: "
-                          (pod-linkable-modules current-prefix-arg) nil nil)
+   (list (pod-do-completing-read "Module: "
+                                 (pod-linkable-modules current-prefix-arg))
          (read-string "Text: ")))
   (pod-link module text))
 
@@ -463,17 +500,17 @@ Insert an L<> formatting code pointing to a part of MODULE
 documentation as described by SECTION.
 
 When called interactive, MODULE, SECTION, and TEXT will be read
-from the minibuffer.
+using `pod-do-completing-read'.
 
-When reading MODULE and SECTION from the minibuffer,
-`pod-linkable-modules' and `pod-linkable-sections', respectively,
-will be used to provide completions."
+When reading MODULE and SECTION, `pod-linkable-modules' and
+`pod-linkable-sections', respectively, will be used to provide
+completions."
   (interactive
-   (let ((module (completing-read "Module: "
-                                  (pod-linkable-modules current-prefix-arg)
-                                  nil nil)))
+   (let ((module (pod-do-completing-read
+                  "Module: "
+                  (pod-linkable-modules current-prefix-arg))))
      (list module
-           (completing-read "Section: " (pod-linkable-sections module) nil nil)
+           (pod-do-completing-read "Section: " (pod-linkable-sections module))
            (read-string "Text: "))))
   (pod-link
    (concat module
@@ -497,27 +534,47 @@ will be used to provide completions."
     st)
   "Syntax table for `pod-mode'.")
 
-(defun pod-add-support-for-outline-minor-mode ()
-  "Provides additional menus from section commands for function `outline-minor-mode'."
+(defun pod-add-support-for-outline-minor-mode (&rest sections)
+  "Provides additional menus from section commands for function
+`outline-minor-mode'.
+
+SECTIONS can be used to supply section commands in addition to
+the POD defaults."
   (make-local-variable 'outline-regexp)
-  (setq outline-regexp "=head[1-4]\s")
+  (setq outline-regexp
+        (format "=%s\s"
+         (regexp-opt
+          (append (loop for i from 1 to 4 collect (format "head%d" i))
+                  '("item") sections))))
   (make-local-variable 'outline-level)
   (setq outline-level
-        (function
-         (lambda ()
-           (save-excursion
-             (save-match-data
-               (if (looking-at
-                    (concat "^="
-                            (regexp-opt
-                             (mapcar (lambda (i) (car i))
-                                     pod-weaver-section-keywords) t)
-                            "\s"))
-                   (cdr (assoc (match-string-no-properties 1)
-                               pod-weaver-section-keywords))
-                 (string-to-number (buffer-substring
-                                    (+ (point) 5)
-                                    (+ (point) 6))))))))))
+        (lambda ()
+          (save-excursion
+            (save-match-data
+              (let ((sect (format "^=%s\s"
+                                  (regexp-opt
+                                   (mapcar (lambda (i) (car i))
+                                           pod-weaver-section-keywords) t))))
+                (cond
+                 ((looking-at sect)
+                  (cdr (assoc (match-string-no-properties 1)
+                              pod-weaver-section-keywords)))
+                 ((looking-at "^=item\s") 5)
+                 ((string-to-number (buffer-substring
+                                     (+ (point) 5)
+                                     (+ (point) 6)))))))))))
+
+(defun pod-add-support-for-imenu (&rest sections)
+  "Set up `imenu-generic-expression' for pod section commands.
+SECTIONS can be used to supply section commands in addition to
+the POD defaults."
+  (setq imenu-generic-expression
+        `((nil ,(format "^=%s\s+\\(.*\\)"
+                        (regexp-opt
+                         (append
+                          (loop for i from 1 to 4 collect (format "head%d" i))
+                          '("item") sections)))
+               1))))
 
 (defun pod-enable-weaver-collector-keywords (collectors)
   "Enable support for Pod::Weaver collector commands.
@@ -543,41 +600,33 @@ Also updates `pod-weaver-section-keywords', `outline-regexp', and
                   when (string-match "^head\\([1-4]\\)$" new-name)
                   collect (cons (symbol-name cmd)
                                 (string-to-number
-                                 (match-string-no-properties 1 new-name)))))
-      (let ((section-regexp
-             (concat "="
-                     (regexp-opt
-                      (append
-                       (mapcar (lambda (i) (car i))
-                               pod-weaver-section-keywords)
-                       (loop for i from 1 to 4
-                             collect (concat "head" (int-to-string i)))))
-                     "\s+")))
-        (setf outline-regexp section-regexp)
-        (setf imenu-generic-expression
-              `((nil ,(concat "^" section-regexp "\\(.*\\)") 1))))
-      (setf
-       pod-font-lock-keywords
-       (append
-        pod-font-lock-keywords
-        (mapcar (lambda (i)
-                  (append
-                   (list (concat
-                          "^\\(="
-                          (regexp-opt (mapcar (lambda (k) (symbol-name k))
-                                              (cdr i)))
-                          "\\)\\(.*\\)"))
-                   (let ((n (symbol-name (car i))))
-                     (if (string-match-p "^head[1-4]$" n)
-                         (list
-                          `(1 (quote
-                               ,(intern (format "pod-mode-%s-face" n))))
-                          `(2 (quote
-                               ,(intern (format "pod-mode-%s-text-face" n)))))
+                                 (match-string-no-properties 1 new-name)))
+                  when (string-match "^item$" new-name)
+                  collect (cons (symbol-name cmd) 5))))
+    (let ((sections (mapcar (lambda (i) (car i))
+                            pod-weaver-section-keywords)))
+      (apply #'pod-add-support-for-outline-minor-mode sections)
+      (apply #'pod-add-support-for-imenu sections))
+    (setf
+     pod-font-lock-keywords
+     (append
+      (mapcar (lambda (i)
+                (append
+                 (list (format "^\\(=%s\\)\\(.*\\)"
+                               (regexp-opt (mapcar (lambda (k) (symbol-name k))
+                                                   (cdr i)))))
+                 (let ((n (symbol-name (car i))))
+                   (if (string-match-p "^head[1-4]$" n)
                        (list
-                        '(1 'pod-mode-command-face)
-                        '(2 'pod-mode-command-text-face))))))
-                collectors-by-replacement))))
+                        `(1 (quote
+                             ,(intern (format "pod-mode-%s-face" n))))
+                        `(2 (quote
+                             ,(intern (format "pod-mode-%s-text-face" n)))))
+                     (list
+                      '(1 'pod-mode-command-face)
+                      '(2 'pod-mode-command-text-face))))))
+              collectors-by-replacement)
+      pod-font-lock-keywords))
     (setq font-lock-mode-major-mode nil)
     (font-lock-fontify-buffer)))
 
@@ -630,7 +679,15 @@ Does nothing if finding the project directory fails."
 
 ;;;###autoload
 (defun pod-mode ()
-  "Major mode for editing POD files (Plain Old Documentation for Perl)."
+  "Major mode for editing POD files (Plain Old Documentation for Perl).
+
+Commands:\\<pod-mode-map>
+\\[pod-link]  `pod-link'
+\\[pod-link-section]     `pod-link-section'
+\\[pod-link-module]     `pod-link-module'
+\\[pod-link-module-section]     `pod-link-module-section'
+
+Turning on pod mode calls the hooks in `pod-mode-hook'."
   (interactive)
   (kill-all-local-variables)
   (set-syntax-table pod-mode-syntax-table)
@@ -639,11 +696,10 @@ Does nothing if finding the project directory fails."
   (setq font-lock-defaults '(pod-font-lock-keywords 't))
   (setq major-mode 'pod-mode)
   (setq mode-name "POD")
-  (setq imenu-generic-expression '((nil "^=head[1-4] +\\(.*\\)" 1)))
-  (run-hooks 'pod-mode-hook)
+  (pod-add-support-for-imenu)
   (pod-add-support-for-outline-minor-mode)
-  (pod-add-support-for-weaver)
-  )
+  (run-hooks 'pod-mode-hook)
+  (pod-add-support-for-weaver))
 
 (provide 'pod-mode)
 
