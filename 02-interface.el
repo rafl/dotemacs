@@ -1,6 +1,8 @@
 ;; disable some ui components
 (menu-bar-mode 0)
+(require 'tool-bar)
 (tool-bar-mode 0)
+(require 'scroll-bar)
 (scroll-bar-mode -1)
 
 ;; defaults for graphical frames. important because emacsclient -c
