@@ -22,7 +22,8 @@
 
 (define-project-type perl (generic)
   (or (look-for "dist.ini") (look-for "Makefile.PL") (look-for "Build.PL"))
-  :relevant-files ("\\.pm$" "\\.pod$" "\\.t$" "\\.pl$" "\\.PL$" "\\.ini$" "Changes")
+  :relevant-files ("\\.pm$" "\\.pod$" "\\.t$""\\.pl$" "\\.PL$" "\\.ini$"
+                   "Changes" "ChangeLog")
   :irrelevant-files ("inc/" "blib/" ".build/" "cover_cb/" "\\.tar\\.gz$")
   :file-name-map (lambda (root)
                    (lambda (root file)
