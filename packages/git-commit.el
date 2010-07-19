@@ -6,8 +6,14 @@
 ;;   The GNU General Public License, Version 2, June 1991
 
 ;; Author: Florian Ragwitz <rafl@debian.org>
-;; Version: 0.0
-;; Keywords: git
+;; Version: 0.1
+;; Keywords: convenience git
+
+;;; History:
+;;
+;;  0.1   Tue, 06 Jul 2010 18:54:35 +0200
+;;    * Initial version
+;;
 
 ;;; Commentary:
 ;;
@@ -273,8 +279,18 @@ default comments in git commit messages"
 (defvar git-commit-mode-hook nil
   "List of functions to be called when activating `git-commit-mode'.")
 
-(defvar git-commit-commit-hook nil
-  "List of functions to be called on `git-commit-commit'.")
+(defun git-commit--save-and-exit ()
+  (save-buffer)
+  (kill-buffer))
+
+(defcustom git-commit-commit-function
+  #'git-commit--save-and-exit
+  "Function to actually perform a commit.
+Used by `git-commit-commit'."
+  :group 'git-commit
+  :type '(radio (function-item :doc "Call `save-buffers-kill-terminal'."
+                               git-commit--save-and-exit)
+                (function)))
 
 (defun git-commit-commit ()
   "Finish editing the commit message and commit.
@@ -291,7 +307,7 @@ message, you might want to this:
           (lambda () (save-buffers-kill-terminal)))"
   (interactive)
   (save-buffer)
-  (run-hooks 'git-commit-commit-hook))
+  (funcall git-commit-commit-function))
 
 (defun git-commit-git-config-var (key)
   "Retrieve a git configuration value.
@@ -561,13 +577,13 @@ providing commands to do common tasks, and by highlighting the
 basic structure of and errors in git commit messages.
 
 Commands:\\<git-commit-map>
-\\[git-commit-commit]   git-commit-commit  Finish editing and commit
-\\[git-commit-signoff]   git-commit-signoff   Insert a Signed-off-by header
-\\[git-commit-ack]   git-commit-ack   Insert an Acked-by header
-\\[git-commit-test]   git-commit-test   Insert a Tested-by header
-\\[git-commit-review]   git-commit-review   Insert a Reviewed-by header
-\\[git-commit-cc]   git-commit-cc   Insert a Cc header
-\\[git-commit-reported]   git-commit-reported   Insert a Reported-by header
+\\[git-commit-commit]   `git-commit-commit'  Finish editing and commit
+\\[git-commit-signoff]   `git-commit-signoff'   Insert a Signed-off-by header
+\\[git-commit-ack]   `git-commit-ack'   Insert an Acked-by header
+\\[git-commit-test]   `git-commit-test'   Insert a Tested-by header
+\\[git-commit-review]   `git-commit-review'   Insert a Reviewed-by header
+\\[git-commit-cc]   `git-commit-cc'   Insert a Cc header
+\\[git-commit-reported]   `git-commit-reported'   Insert a Reported-by header
 
 Turning on git commit calls the hooks in `git-commit-mode-hook'."
   (interactive)
@@ -575,6 +591,13 @@ Turning on git commit calls the hooks in `git-commit-mode-hook'."
   (use-local-map git-commit-map)
   (setq font-lock-multiline t)
   (setq font-lock-defaults '(git-commit-font-lock-keywords t))
+  (make-local-variable 'comment-start-skip)
+  (make-local-variable 'comment-start)
+  (make-local-variable 'comment-end)
+  (setq comment-start-skip "^#\s"
+        comment-start "# "
+        comment-end "")
+  (setq session-last-change (point-min))
   (setq major-mode 'git-commit)
   (run-hooks 'git-commit-mode-hook)
   (setq mode-name "Git-Commit"))
