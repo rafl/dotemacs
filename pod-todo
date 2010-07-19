@@ -16,3 +16,9 @@
      two builtin parsers for normal text and tex.
 * nested commands without different quote chars
   - C<I<username>@B<machine>>
+
+* remove duplicated code in dynamic highlighting/outline/imenu with weaver words
+
+* git commit needs a way to "close" a frame, or something
+
+for both emacs and emacsclient

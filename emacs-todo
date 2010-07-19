@@ -103,3 +103,11 @@ When executing an interactive form with M-x, no debugging editing
 level level is entered on error. However, with global debug-on-error
 enabled, recursive editing is done even on errors which are later
 catched. Massive suck when implementing and testing interactive forms.
+
+* Gnus
+
+** pretty colors in summary
+
+** stop quote highlighting
+
+it's horrible when they happen to be unbalanced
