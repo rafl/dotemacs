@@ -29,6 +29,17 @@
  gnus-sum-thread-tree-single-leaf "└► "
 
  ;; "INBOX" instead of "nnimap+perldition:INBOX"
- gnus-group-line-format "%M%S%p%P%5y:%B%(%G%)%O\n")
+ gnus-group-line-format "%M%S%p%P%5y:%B%(%G%)%O\n"
+
+ gnus-outgoing-message-group "nnimap+perldition:Sent"
+ gnus-gcc-mark-as-read t)
 
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+(add-hook 'gnus-message-setup-hook 'mml-secure-message-sign-pgpmime)
+
+;; FIXME: no worky
+(eval-after-load "mm-decode"
+  '(add-to-list 'mm-automatic-display "application/pgp$"))
+(eval-after-load "mm-decode"
+  (quote (setq mm-automatic-display (remove "application/pgp-signature"
+                                            mm-automatic-display))))
