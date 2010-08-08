@@ -43,3 +43,17 @@
 (eval-after-load "mm-decode"
   (quote (setq mm-automatic-display (remove "application/pgp-signature"
                                             mm-automatic-display))))
+
+;; mutt-like 'd', which will set the deleted flag on imap articles
+(defun rafl-gnus-summary-delete-article-forward (&optional n)
+  (interactive "p")
+  ;; I should probably turn off gnus-novice-user globally at some point, but for
+  ;; now this is safer.
+  (let ((gnus-novice-user nil))
+    (gnus-summary-delete-article n))
+  (gnus-summary-next-subject (if (< n 0) -1 1) t))
+
+(add-hook'gnus-summary-mode-hook
+          (lambda ()
+            (local-set-key (kbd "d")
+                           'rafl-gnus-summary-delete-article-forward)))
