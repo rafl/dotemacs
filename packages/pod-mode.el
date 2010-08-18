@@ -45,7 +45,8 @@
 
 ;;; Put this file into your load-path and the following into your ~/.emacs:
 ;;;
-;;;    (require 'pod-mode)
+;;;    (autoload 'pod-mode "pod-mode"
+;;;      "Mode for editing POD files" t)
 ;;;
 ;;;
 ;;; To associate pod-mode with .pod files add the following to your ~/.emacs
@@ -87,14 +88,7 @@
   :group 'pod-mode)
 
 (defface pod-mode-command-face
-  '((((class grayscale) (background light)) (:foreground "LightGray" :weight bold))
-    (((class grayscale) (background dark)) (:foreground "DimGray" :weight bold))
-    (((class color) (min-colors 88) (background light)) (:foreground "Purple"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "Cyan1"))
-    (((class color) (min-colors 16) (background light)) (:foreground "Purple"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "Cyan"))
-    (((class color) (min-colors 8)) (:foreground "cyan" :weight bold))
-    (t (:weight bold)))
+  '((t (:inherit font-lock-keyword-face)))
   "Face used to highlight POD commands"
   :group 'pod-mode-faces)
 
@@ -104,63 +98,22 @@
   :group 'pod-mode-faces)
 
 (defface pod-mode-command-text-face
-  '((((class grayscale) (background light))
-     (:foreground "DimGray" :weight bold :slant italic))
-    (((class grayscale) (background dark))
-     (:foreground "LightGray" :weight bold :slant italic))
-    (((class color) (min-colors 88) (background light))
-     (:foreground "Firebrick"))
-    (((class color) (min-colors 88) (background dark))
-     (:foreground "chocolate1"))
-    (((class color) (min-colors 16) (background light))
-     (:foreground "red"))
-    (((class color) (min-colors 16) (background dark))
-     (:foreground "red1"))
-    (((class color) (min-colors 8) (background light))
-     (:foreground "red"))
-    (((class color) (min-colors 8) (background dark))
-     )
-    (t (:weight bold :slant italic)))
+  '((t (:inherit font-lock-comment-face)))
   "Face used to highlight text after POD commands"
   :group 'pod-mode-faces)
 
 (defface pod-mode-verbatim-face
-  '((((class grayscale) (background light)) (:foreground "Gray90" :weight bold))
-    (((class grayscale) (background dark)) (:foreground "DimGray" :weight bold))
-    (((class color) (min-colors 88) (background light)) (:foreground "ForestGreen"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "PaleGreen"))
-    (((class color) (min-colors 16) (background light)) (:foreground "ForestGreen"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "PaleGreen"))
-    (((class color) (min-colors 8)) (:foreground "green"))
-    (t (:weight bold :underline t)))
+  '((t (:inherit font-lock-type-face)))
   "Face used to highlight verbatim paragraphs in POD"
   :group 'pod-mode-faces)
 
 (defface pod-mode-formatting-code-character-face
-  '((((class grayscale) (background light))
-     (:foreground "Gray90" :weight bold :slant italic))
-    (((class grayscale) (background dark))
-     (:foreground "DimGray" :weight bold :slant italic))
-    (((class color) (min-colors 88) (background light)) (:foreground "sienna"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "LightGoldenrod"))
-    (((class color) (min-colors 16) (background light)) (:foreground "DarkGoldenrod"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "LightGoldenrod"))
-    (((class color) (min-colors 8)) (:foreground "yellow" :weight light))
-    (t (:weight bold :slant italic)))
+  '((t (:inherit font-lock-variable-name-face)))
   "Face used to highlight formatting codes in POD"
   :group 'pod-mode-faces)
 
 (defface pod-mode-formatting-code-face
-  '((((class grayscale) (background light))
-     (:foreground "LightGray" :weight bold :underline t))
-    (((class grayscale) (background dark))
-     (:foreground "Gray50" :weight bold :underline t))
-    (((class color) (min-colors 88) (background light)) (:foreground "dark cyan"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "Aquamarine"))
-    (((class color) (min-colors 16) (background light)) (:foreground "CadetBlue"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "Aquamarine"))
-    (((class color) (min-colors 8)) (:foreground "magenta"))
-    (t (:weight bold :underline t)))
+  '((t (:inherit font-lock-constant-face)))
   "Face used to highlight text within formatting codes in POD"
   :group 'pod-mode-faces)
 
@@ -175,34 +128,21 @@
   :group 'pod-mode-faces)
 
 (defface pod-mode-alternative-formatting-code-face
-  '((((class color) (min-colors 88) (background light)) (:foreground "Blue1"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "LightSkyBlue"))
-    (((class color) (min-colors 16) (background light)) (:foreground "Blue"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "LightSkyBlue"))
-    (((class color) (min-colors 8)) (:foreground "blue" :weight bold))
-    (t (:inverse-video t :weight bold)))
+  '((t (:inherit font-lock-function-name-face)))
   "Alternative face used to highlight formatting codes in POD.
 This is used for E<> escapes and for the link target in L<>
 escapes."
   :group 'pod-mode-faces)
 
 (defface pod-mode-string-face
-  '((((class grayscale) (background light)) (:foreground "DimGray" :slant italic))
-    (((class grayscale) (background dark)) (:foreground "LightGray" :slant italic))
-    (((class color) (min-colors 88) (background light)) (:foreground "VioletRed4"))
-    (((class color) (min-colors 88) (background dark)) (:foreground "LightSalmon"))
-    (((class color) (min-colors 16) (background light)) (:foreground "RosyBrown"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "LightSalmon"))
-    (((class color) (min-colors 8)) (:foreground "green"))
-    (t (:slant italic)))
+  '((t (:inherit font-lock-string-face)))
   "Face used to highlight quoted strings in POD"
   :group 'pod-mode-faces)
 
 (defvar pod-mode-hook nil
   "List of functions to be called when activating `pod-mode'.")
 
-;;; Version: 1.01
-(defvar pod-version "1.01"
+(defvar pod-version "1.03"
   "Version of POD mode.")
 
 (let* ((head-sizes '(1.9 1.7 1.5 1.3))
