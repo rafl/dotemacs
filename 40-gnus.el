@@ -32,7 +32,10 @@
  gnus-group-line-format "%M%S%p%P%5y:%B%(%G%)%O\n"
 
  gnus-outgoing-message-group "nnimap+perldition:Sent"
- gnus-gcc-mark-as-read t)
+ gnus-gcc-mark-as-read t
+
+ gnus-use-correct-string-widths t
+ gnus-interactive-exit nil)
 
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 (add-hook 'gnus-message-setup-hook 'mml-secure-message-sign-pgpmime)
@@ -57,3 +60,11 @@
           (lambda ()
             (local-set-key (kbd "d")
                            'rafl-gnus-summary-delete-article-forward)))
+
+;; inline html mails, with pictures
+(setq
+ mm-inline-text-html-renderer 'mm-inline-text-html-render-with-w3m
+ w3m-display-inline-image t
+ gnus-article-wash-function 'gnus-article-wash-html-with-w3m)
+
+(global-set-key (kbd "C-c C-m") 'gnus)
