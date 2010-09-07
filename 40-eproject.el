@@ -51,3 +51,39 @@
 (.emacs-eproject-key "v" eproject-revisit-project nil)
 (.emacs-eproject-key "b" eproject-ibuffer t)
 (.emacs-eproject-key "o" eproject-open-all-project-files t)
+
+(defvar rafl-per-project-settings nil "rafl's per-project buffer settings")
+(setq rafl-per-project-settings
+      '(("perl"
+         (lambda ()
+                  (when (save-excursion
+                          (goto-char (point-min))
+                          (re-search-forward "\t" nil t))
+                    (message "moo")
+                    (setq
+                     tab-width 8
+                     indent-tabs-mode t)))
+         (lambda ()
+           (when (eq major-mode 'c-mode)
+             (setq
+              c-indentation-style 'bsd
+              c-basic-offset 4))))
+        ("git"
+         ((indent-tabs-mode t)))
+        ("xmms2"
+         ((c-basic-offset 4)
+          (c-indentation-style 'bsd)))))
+
+(defun rafl-apply-buffer-settings-for-project (project)
+  (let ((settings (cdr (assoc project rafl-per-project-settings))))
+    (loop for setting in settings
+          do (if (functionp setting)
+                 (funcall setting)
+               (apply #'set setting)))))
+
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (when (and (buffer-file-name)
+                       (not eproject-root)
+                       (eproject-maybe-turn-on))
+              (rafl-apply-buffer-settings-for-project (eproject-name)))))
