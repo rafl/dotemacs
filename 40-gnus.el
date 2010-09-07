@@ -1,8 +1,15 @@
+(require 'nnir)
+
 (setq
- gnus-secondary-select-methods '((nnimap "perldition"
-                                         (nnimap-address "imap.perldition.org")
-                                         (nnimap-server-port 143)
-                                         (nnimap-stream starttls)))
+ gnus-select-method '(nnimap "perldition"
+                             (nnimap-address "imap.perldition.org")
+                             ;; I'd use 143 and starttls, but gnus seems buggy
+                             ;; in reconnecting with that
+                             (nnimap-server-port 993)
+                             (nnimap-stream ssl)
+                             (nnir-search-engine imap))
+
+ nnir-search-engine 'imap
 
  ;;; display threads in the summary buffer in a way humans can understand. for
  ;;; example like this:
