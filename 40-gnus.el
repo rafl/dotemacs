@@ -86,3 +86,8 @@
  gnus-article-wash-function 'gnus-article-wash-html-with-w3m)
 
 (global-set-key (kbd "C-c C-m") 'gnus)
+(global-set-key (kbd "C-x m")
+                (lambda ()
+                  (interactive)
+                  (gnus)
+                  (gnus-group-mail)))
