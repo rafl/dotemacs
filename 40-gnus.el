@@ -63,10 +63,21 @@
     (gnus-summary-delete-article n))
   (gnus-summary-next-subject (if (< n 0) -1 1) t))
 
-(add-hook'gnus-summary-mode-hook
+(add-hook 'gnus-summary-mode-hook
           (lambda ()
             (local-set-key (kbd "d")
                            'rafl-gnus-summary-delete-article-forward)))
+
+(defun rafl-gnus-group-suspend ()
+  (interactive)
+  (gnus-group-save-newsrc)
+  (goto-char (point-min))
+  (gnus-group-suspend))
+
+(add-hook 'gnus-group-mode-hook
+          (lambda ()
+            (local-set-key (kbd "z")
+                           'rafl-gnus-group-suspend)))
 
 ;; inline html mails, with pictures
 (setq
