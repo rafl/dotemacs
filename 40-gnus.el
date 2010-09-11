@@ -23,7 +23,7 @@
  ;; O   15.07.2010 20:36  Jesse Vincent    │└►
  ;; O   15.07.2010 17:37  Dave Rolsky      └►
 
- gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f %* %B%s%)\n"
+ gnus-summary-line-format "%U%R%z %(%&user-date;  %ub%-15,15f %* %B%s%)\n"
  gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
  gnus-thread-sort-functions '(gnus-thread-sort-by-date)
