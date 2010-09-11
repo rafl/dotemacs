@@ -80,8 +80,6 @@
    (t
     (error "invalid condition"))))
 
-(rafl:evaluate-buffer-condition '(:mode "lisp" :project t))
-
 (defun rafl:apply-buffer-settings (settings)
   (dolist (setting rafl:buffer-settings)
     (let ((condition (car setting))
