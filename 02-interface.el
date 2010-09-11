@@ -74,9 +74,6 @@
               (setq show-trailing-whitespace t))))
 
 (set-default 'fill-column 80)
-(add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (highlight-beyond-fill-column)))
 
 ;; highlight current line
 (global-hl-line-mode t)
