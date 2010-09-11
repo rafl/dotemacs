@@ -6,8 +6,7 @@
                              ;; I'd use 143 and starttls, but gnus seems buggy
                              ;; in reconnecting with that
                              (nnimap-server-port 993)
-                             (nnimap-stream ssl)
-                             (nnir-search-engine imap))
+                             (nnimap-stream ssl))
 
  nnir-search-engine 'imap
 
