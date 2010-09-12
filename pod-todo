@@ -19,6 +19,8 @@
 
 * remove duplicated code in dynamic highlighting/outline/imenu with weaver words
 
+* make C-c C-l u default its uri param to paste buffer's content
+
 * git commit needs a way to "close" a frame, or something
 
 for both emacs and emacsclient
