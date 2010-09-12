@@ -1,6 +1,6 @@
 (defvar rafl:buffer-settings)
 (setq rafl:buffer-settings
-      '((((:not ((:mode "^gnus") (:mode w3m-mode))))
+      '((((:not ((:mode "^gnus") (:mode w3m-mode) (:mode "^erc"))))
          (lambda () (highlight-beyond-fill-column)))
         (((:mode message-mode)
           (:mode org-mode)
