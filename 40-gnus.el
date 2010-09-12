@@ -78,6 +78,11 @@
             (local-set-key (kbd "z")
                            'rafl-gnus-group-suspend)))
 
+(add-hook 'message-mode-hook
+          (lambda ()
+            (local-set-key (kbd "M-;")
+                           'bbdb-complete-name)))
+
 ;; inline html mails, with pictures
 (setq
  mm-inline-text-html-renderer 'mm-inline-text-html-render-with-w3m
