@@ -598,7 +598,7 @@ Turning on git commit calls the hooks in `git-commit-mode-hook'."
         comment-start "# "
         comment-end "")
   (setq session-last-change (point-min))
-  (setq major-mode 'git-commit)
+  (setq major-mode 'git-commit-mode)
   (run-hooks 'git-commit-mode-hook)
   (setq mode-name "Git-Commit"))
 

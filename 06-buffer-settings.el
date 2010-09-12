@@ -6,6 +6,7 @@
           (:mode org-mode)
           (:mode pod-mode)
           (:mode markdown-mode)
+          (:mode git-commit-mode)
           (:filename "\\.\\(txt\\|mkn\\)$"))
          (lambda ()
            (flyspell-mode 1)
