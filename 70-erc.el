@@ -21,6 +21,11 @@
       (setq ad-return-value 'erc-current-nick-face)
     ad-do-it))
 
+(add-hook 'erc-join-hook
+          (lambda ()
+            (when (string= (buffer-name) "#braunglasmafia")
+              (activate-input-method default-input-method))))
+
 (setq
  erc-auto-query 'bury
  erc-autoaway-idle-method 'user
