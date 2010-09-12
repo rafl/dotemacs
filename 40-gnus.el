@@ -89,7 +89,10 @@
  w3m-display-inline-image t
  gnus-article-wash-function 'gnus-article-wash-html-with-w3m)
 
-(global-set-key (kbd "C-c C-m") 'gnus)
+(global-set-key (kbd "C-c m") 'gnus)
+
+;; mail with gnus instead of plain message mode to get all the hooks, Gcc
+;; settings, and whatnot
 (global-set-key (kbd "C-x m")
                 (lambda ()
                   (interactive)
