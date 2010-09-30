@@ -28,7 +28,10 @@
            (setq
             tab-width 8
             indent-tabs-mode t
-            c-basic-offset 8)))))
+            c-basic-offset 8)))
+        (((:project "gnus"))
+         (lambda ()
+           (setq tab-width 8)))))
 
 (defun rafl:evaluate-buffer-condition (con)
   (cond
