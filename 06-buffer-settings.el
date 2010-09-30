@@ -15,6 +15,11 @@
          (lambda ()
            (flyspell-mode 1)
            (auto-fill-mode 1)))
+        (((:mode c-mode)
+          (:mode cperl-mode)
+          (:mode emacs-lisp-mode))
+         (lambda ()
+           (flyspell-prog-mode)))
         (((:project "perl"))
          (lambda ()
            (when (save-excursion
